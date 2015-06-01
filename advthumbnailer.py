@@ -57,7 +57,7 @@ def thumbnail_to_original_path(thumbnail_path):
 class Thumbnailer(object):
     """ Resizes based on a text specification, see readme """
 
-    REGEX = re.compile(r'(\d+|_)x(\d+|_)(!?)')
+    REGEX = re.compile(r'(\d+|_|-)x(\d+|_|-)(!?)')
 
     def __init__(self):
         pass
@@ -93,7 +93,11 @@ class Thumbnailer(object):
         else:
             matches = self.REGEX.search(spec)
             tmpw = matches.group(1)
+            if tmpw == '-':
+                tmpw = '_'
             tmph = matches.group(2)
+            if tmph == '-':
+                tmph = '_'
             forced = matches.group(3)
 
             # Full Size
