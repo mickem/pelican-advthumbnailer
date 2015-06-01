@@ -164,7 +164,7 @@ def find_image_urls_in_file(file_path, settings):
 
         imgs = soup.find_all("img")
 
-        urls = [img["src"] for img in imgs]
+        urls = [img["src"] for img in filter(lambda x:x.has_attr('src'), imgs)]
 
         if settings.get("ADVTHUMB_SEARCH_IMAGES_IN_ANCHORS", False):
             import urlparse, mimetypes
